@@ -13,7 +13,8 @@ WORKDIR /mnt
 RUN ./build.sh
 
 
+# # deployment image
 FROM alpine:3.17
-COPY --from=builder /mnt/out/test-app
+COPY --from=builder /mnt/out/test-app /deploy/test-app
 
-CMD ["./mnt/out/test-app"]
+CMD ["./deploy/test-app"]

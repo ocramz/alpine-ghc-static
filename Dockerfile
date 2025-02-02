@@ -1,9 +1,19 @@
 # Must be a supported GHC version, see https://github.com/fossas/haskell-static-alpine/tree/master 
 ARG GHC_VERSION=9.8.2
 
-FROM fossa/haskell-static-alpine:ghc-"${GHC_VERSION}" as base
+FROM fossa/haskell-static-alpine:ghc-"${GHC_VERSION}" as builder
 
+# add context directory (assuming project source is there )
 ADD . /mnt
 
+# set working directory
 WORKDIR /mnt
+
+# cabal build etc.
 RUN ./build.sh
+
+
+FROM alpine:3.17
+COPY --from=builder /mnt/out/test-app
+
+CMD ["./mnt/out/test-app"]

@@ -17,7 +17,10 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Build image and project
         run: |
-          docker build -t builder:latest .
-          docker run -t -v $PWD:/mnt builder:latest bash -c "cd /mnt && ls -lsa"
+          docker build -t alpine_deploy .
+
+          docker run -t alpine_deploy
+
+          # docker run -t -v $PWD:/mnt builder:latest bash -c "cd /mnt && ls -lsa"
           # docker run -t -v $PWD:/mnt builder:latest bash /mnt/build.sh
           

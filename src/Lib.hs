@@ -3,4 +3,6 @@ module Lib
     ) where
 
 someFunc :: IO ()
-someFunc = putStrLn "hello!"
+someFunc = do
+  putStrLn ""
+  putStrLn "hello from a statically linked Haskell app!"

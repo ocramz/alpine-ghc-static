@@ -1,12 +1,7 @@
-################################################################################
-# Set up environment variables, OS packages, and scripts that are common to the
-# build and distribution layers in this Dockerfile
-
-# Must be a valid GHC version number
-#
-# Default to GHC version
+# Must be a supported GHC version, see https://github.com/fossas/haskell-static-alpine/tree/master
 ARG GHC_VERSION=9.8.2
 
 FROM fossa/haskell-static-alpine:ghc-"${GHC_VERSION}" as base
 
-
+# RUN apk update \
+#     && apk add file

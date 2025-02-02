@@ -3,4 +3,5 @@ ARG GHC_VERSION=9.8.2
 
 FROM fossa/haskell-static-alpine:ghc-"${GHC_VERSION}" as base
 
+WORKDIR /mnt
 RUN ./build.sh

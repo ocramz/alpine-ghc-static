@@ -1,4 +1,4 @@
-# alpine-stack-test
+# alpine-ghc-static ⛰️🐳
 
 [![CI](https://github.com/ocramz/alpine-stack/actions/workflows/blank.yml/badge.svg)](https://github.com/ocramz/alpine-stack/actions/workflows/blank.yml)
 

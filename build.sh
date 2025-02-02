@@ -1,6 +1,6 @@
 #!/bin/bash
 
-apk add file
+apk update && apk add file
 
 # we mounted the source repo as a Docker volume in /mnt
 cd /mnt

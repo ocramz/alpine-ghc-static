@@ -12,4 +12,8 @@ cabal build --enable-executable-static
 mkdir out/
 cp $(cabal -v0 list-bin exe:test-app) out/
 
+# look for "statically linked" in the output of 'file':
 file out/test-app
+
+# run binary
+./out/test-app

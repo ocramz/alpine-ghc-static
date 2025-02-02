@@ -7,7 +7,7 @@
 # Default to GHC version
 ARG GHC_VERSION=9.8.2
 
-FROM fossa/haskell-static-alpine:"${GHC_VERSION}" as base
+FROM fossa/haskell-static-alpine:ghc-"${GHC_VERSION}" as base
 
 # FROM quay.io/benz0li/ghc-musl:"${GHC_VERSION}" AS base
 

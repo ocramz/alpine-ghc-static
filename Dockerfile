@@ -5,4 +5,5 @@ FROM fossa/haskell-static-alpine:ghc-"${GHC_VERSION}" as base
 
 ADD . /mnt
 
+WORKDIR /mnt
 RUN ./build.sh

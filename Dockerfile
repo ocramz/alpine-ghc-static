@@ -5,7 +5,7 @@
 # Must be a valid GHC version number
 #
 # Default to GHC version
-ARG GHC_VERSION=9.6.6
+ARG GHC_VERSION=9.8.2
 
 FROM fossa/haskell-static-alpine:"${GHC_VERSION}" as base
 

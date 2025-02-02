@@ -18,6 +18,6 @@ jobs:
       - name: Build image and project
         run: |
           docker build -t builder:latest .
-          docker run -t -v $PWD:/mnt builder:latest "cd /mnt && ls -lsa"
-          # docker run -t -v $PWD:/mnt builder:latest "cd /mnt && cabal build --enable-executable-static"
+          docker run -t -v $PWD:/mnt builder:latest bash -c "cd /mnt && ls -lsa"
+          # docker run -t -v $PWD:/mnt builder:latest bash -c "cd /mnt && cabal build --enable-executable-static"
           

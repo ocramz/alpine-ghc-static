@@ -21,6 +21,8 @@ jobs:
 
           docker run -t alpine_deploy
 
+          docker images
+
           # docker run -t -v $PWD:/mnt builder:latest bash -c "cd /mnt && ls -lsa"
           # docker run -t -v $PWD:/mnt builder:latest bash /mnt/build.sh
           

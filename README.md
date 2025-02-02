@@ -2,4 +2,6 @@
 
 [![CI](https://github.com/ocramz/alpine-stack/actions/workflows/blank.yml/badge.svg)](https://github.com/ocramz/alpine-stack/actions/workflows/blank.yml)
 
-building statically linked Haskell binaries on Alpine Linux
+Building statically linked Haskell binaries on Alpine Linux with a recent GHC (9.8.2)
+
+Also demonstrates multi-stage Docker builds

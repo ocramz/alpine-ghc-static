@@ -26,5 +26,5 @@ ls -lsa out/
 # look for "statically linked" in the output of 'file':
 file out/test-app
 
-# run binary
-./out/test-app
+# # run app
+# ./out/test-app

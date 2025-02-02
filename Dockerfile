@@ -7,38 +7,40 @@
 # Default to GHC version
 ARG GHC_VERSION=9.6.6
 
-FROM quay.io/benz0li/ghc-musl:"${GHC_VERSION}" AS base
+FROM fossa/haskell-static-alpine:"${GHC_VERSION}" as base
 
-ARG GHC_BUILD_TYPE=gmp
-ARG STACK_VERSION=3.3.1
+# FROM quay.io/benz0li/ghc-musl:"${GHC_VERSION}" AS base
 
-################################################################################
-# Intermediate layer that assembles 'stack' tooling
-FROM base AS build-tooling
+# ARG GHC_BUILD_TYPE=gmp
+# ARG STACK_VERSION=3.3.1
 
-ARG STACK_VERSION
+# ################################################################################
+# # Intermediate layer that assembles 'stack' tooling
+# FROM base AS build-tooling
 
-
-# Download, install stack
-RUN echo "Downloading and installing stack" &&\
-    cd /tmp &&\
-    wget -P /tmp/ "https://github.com/commercialhaskell/stack/releases/download/v${STACK_VERSION}/stack-${STACK_VERSION}-linux-x86_64-static.tar.gz" &&\
-
-    tar -xvzf /tmp/stack-${STACK_VERSION}-linux-x86_64-static.tar.gz &&\
-    cp -L /tmp/stack-${STACK_VERSION}-linux-x86_64-static/stack /usr/bin/stack &&\
-    rm /tmp/stack-${STACK_VERSION}-linux-x86_64-static.tar.gz &&\
-    rm -rf /tmp/stack-${STACK_VERSION}-linux-x86_64-static
-
-################################################################################
-# Assemble the final image
-FROM base
-
-ARG GHC_VERSION
+# ARG STACK_VERSION
 
 
-COPY --from=build-tooling /usr/bin/stack /usr/bin/stack
+# # Download, install stack
+# RUN echo "Downloading and installing stack" &&\
+#     cd /tmp &&\
+#     wget -P /tmp/ "https://github.com/commercialhaskell/stack/releases/download/v${STACK_VERSION}/stack-${STACK_VERSION}-linux-x86_64-static.tar.gz" &&\
 
-# NOTE: 'stack --docker' needs bash + usermod/groupmod (from shadow)
-RUN apk add --no-cache bash shadow openssh-client tar
+#     tar -xvzf /tmp/stack-${STACK_VERSION}-linux-x86_64-static.tar.gz &&\
+#     cp -L /tmp/stack-${STACK_VERSION}-linux-x86_64-static/stack /usr/bin/stack &&\
+#     rm /tmp/stack-${STACK_VERSION}-linux-x86_64-static.tar.gz &&\
+#     rm -rf /tmp/stack-${STACK_VERSION}-linux-x86_64-static
 
-RUN stack config set system-ghc --global true
+# ################################################################################
+# # Assemble the final image
+# FROM base
+
+# ARG GHC_VERSION
+
+
+# COPY --from=build-tooling /usr/bin/stack /usr/bin/stack
+
+# # NOTE: 'stack --docker' needs bash + usermod/groupmod (from shadow)
+# RUN apk add --no-cache bash shadow openssh-client tar
+
+# RUN stack config set system-ghc --global true

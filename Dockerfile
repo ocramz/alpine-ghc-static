@@ -3,7 +3,7 @@ ARG GHC_VERSION=9.8.2
 
 FROM fossa/haskell-static-alpine:ghc-"${GHC_VERSION}" as builder
 
-# add context directory (assuming project source is there )
+# add context directory (where the project source is)
 ADD . /mnt
 
 # set working directory

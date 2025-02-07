@@ -1,0 +1,47 @@
+ARG ALPINE_VERSION=3.20
+ARG GHC_VERSION=9.6.6
+
+FROM alpine:$ALPINE_VERSION as builder
+
+ARG GHC_VERSION
+
+# # binary package : statically linked
+ARG GHC_ARCHIVE=ghc-${GHC_VERSION}-x86_64-alpine3_12-linux-static.tar.xz
+
+RUN apk update \
+    && apk --no-cache add pkgconfig python3 binutils-gold curl wget gcc g++ git gmp-dev ncurses-dev ncurses-static libffi-dev make xz xz-static tar perl zlib-dev zlib-static bash sudo libc6-compat git-lfs tar
+
+RUN wget https://downloads.haskell.org/~ghc/${GHC_VERSION}/${GHC_ARCHIVE} \
+    && tar -xf /${GHC_ARCHIVE}
+
+WORKDIR /ghc-$GHC_VERSION-x86_64-unknown-linux
+
+# # for a STATICALLY-LINKED-GHC:
+# # # as suggested in https://gitlab.haskell.org/ghc/ghc/-/issues/20168
+RUN ./configure DYNAMIC_GHC_PROGRAMS=NO \
+    && make install
+
+RUN which ghc
+
+RUN ghc --info
+
+RUN apk update\
+    && apk add stack \
+    && stack --version
+
+
+# add context directory (where the project source is)
+ADD . /mnt
+
+# set working directory
+WORKDIR /mnt
+
+RUN apk update \
+    && apk add file z3 upx
+
+
+### stack build
+
+RUN stack build \
+    --no-install-ghc --system-ghc\
+    --ghc-options="-static -optl-static -optl-pthread -fPIC"

@@ -22,4 +22,12 @@ jobs:
           docker run -t alpine_deploy
 
           docker images
+
+      - name: Build from binary GHC package (static linked GHC)
+        run: |
+          docker build -t alpine_deploy_binpack -f Dockerfile.from_ghc_binary_package .
+
+          docker run -t alpine_deploy_binpack
+
+          docker images
           

@@ -45,3 +45,5 @@ RUN apk update \
 RUN stack build \
     --no-install-ghc --system-ghc\
     --ghc-options="-static -optl-static -optl-pthread -fPIC"
+
+CMD ["ls -lsa"]
